@@ -1,0 +1,16 @@
+doctype html
+mixin item(title,url)
+    a(href=url class=path==url ? 'active':'')&attributes(attributes)=title
+
+//- -var list=[""]
+
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    nav(class='topnav')
+        +item('Zlecenia','/news')(class='color1')
+   
+        
+    block content

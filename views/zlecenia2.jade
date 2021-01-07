@@ -1,0 +1,154 @@
+extends layout
+
+block content
+  h1= title
+  -var maciek1=true
+  -var kamil1=true
+  -var maciek2=true
+  -var kamil2=true
+  -var maciek3=true
+  -var kamil3=true
+  -var maciek4=true
+  -var kamil4=true
+  -var maciek5=true
+  -var kamil5=true
+  -var maciek6=true
+  -var kamil6=true
+ 
+  if dane.charakter===true
+    -maciek1=false
+    -kamil1=true
+  else if dane.charakter===false
+    -maciek1=true
+    -kamil1=false
+
+
+  if dane.forma_wspol===true
+    -maciek2=false
+    -kamil2=true
+  else if dane.forma_wspol===false
+    -maciek2=true
+    -kamil2=false
+
+  if dane.cel_badans===true
+    -maciek3=false
+    -kamil3=true
+  else if dane.cel_badans===false
+    -maciek3=true
+    -kamil3=false
+
+  if dane.badania_niepews===true
+    -maciek4=false
+    -kamil4=true
+  else if dane.badania_niepews===false
+    -maciek4=true
+    -kamil4=false
+
+  if dane.badania_tolers===true
+    -maciek5=false
+    -kamil5=true
+  else if dane.badania_tolers===false
+    -maciek5=true
+    -kamil5=false
+
+  if errors.errors !== undefined
+    each message in errors.errors
+       p(class='notactive')=message
+    //- sprawdxam czy błędy przy dodawnaiu sie znajduja !!
+  
+  div(class="container")
+    form( method='post')
+        p
+            label Nazwa firmy 
+            input(type="text" name='nazwa_firmy' value=body.nazwa_firmy ||'') 
+        p
+            label Adres
+            input(type="text" name="adres_firmy" value=body.adres_firmy ||'')
+        p
+            label NIP
+            input(type="text" name='nip_firmy' value=body.nip_firmy ||'')
+            //- data otrzymania zlecenia bedzie domyslnie 
+        p
+            label  Imie i nazwisko przedstawiciela firmy
+            input(type="text" name='dane_przedstawiciela' value=body.dane_przedstawiciela ||'')
+        p
+            label numer telefonu
+            input(type="text" name="nr_tel_firmy" value=body.nr_tel_firmy ||'')
+        
+        p
+            label podaj adres mailowy firmy
+            input(type="email" name='adres_mail_firmy' value=body.adres_mail_firmy||'')
+        p
+            label Adres email do wysłania faktury 
+            input(type="email" name='adres_mail_faktura' value=body.adres_mail_faktura ||'')
+        p
+            label Adres fizyczny do wysłania faktury 
+            input(type="text" name='adres_fizyczny_faktura' value=body.adres_fizyczny_faktura ||'')
+        p 
+            h3 Dane płatnika 
+            p
+                label Adres Płatnika
+                input(type="text" name="Adres_platnik" value=body.Adres_platnik ||'')
+            p
+                label  Imie i nazwisko 
+                input(type="text" name='Dane_platnik' value=body.Dane_platnik ||'')
+            p
+                label numer telefonu
+                input(type="text" name="nr_tel_platnik" value=body.nr_tel_platnik ||'')
+            p
+                label adres mail płatnika
+                input(type="email" name='adres_mail_platnik' value=body.adres_mail_platnik ||'')
+    
+            h3 Dane dotyczące zlecenia
+            p
+                label Charakter zlecenia:
+                br
+                input(type="radio" name='char_zlecenia' value='nie'  checked=maciek1)
+                label jednorazowe
+                br
+                input(type="radio" name='char_zlecenia' value='tak'  checked=kamil1)
+                label stale
+                
+            p
+                label Forma współpracy:
+                br
+                input(type="radio" name='form_wspolpracy' value='nie'  checked=maciek2)
+                label zamówienie
+                br
+                input(type="radio" name='form_wspolpracy' value='tak'  checked=kamil2)
+                label umowa
+            p
+                label Cel badań/wzorcowania/pobierania próbek:
+                br
+                input(type="radio" name='cel_badan' value='nie' checked=maciek3)
+                label dla potrzeb własnych 
+                br
+                input(type="radio" name='cel_badan' value='tak' checked=kamil3)
+                label dla potrzeb obszaru regulowanego
+        p
+            label Wyniki badnań podać z niepewnością
+            br
+            input(type="radio" name='badania_niepew' value='nie' checked=maciek4)
+            label tak
+            br
+            input(type="radio" name='badania_niepew' value='tak'  checked=kamil4)
+            label nie
+        p
+            label Wyniki badnań podać z tolerancją 
+            br
+            input(type="radio" name='badania_toler' value='nie'  checked=maciek5)
+            label tak
+            br
+            input(type="radio" name='badania_toler' value='tak'  checked=kamil5)
+            label nie
+        p
+            label Obiekt badań/wzorcowań/pobierania próbek 
+        p
+            label Forma: miernik + sonda, miernik2 + sonda + sonda , itd
+            input(type="text" name="obiekt_badan" value=body.obiekt_badan ||'')
+        p
+            label Informacje dodatkowe, uwagi 
+            input(type="text" name="dodatkowe_informacje" value=body.dodatkowe_informacje ||'')
+
+        p
+            input(type="submit" name='title')
